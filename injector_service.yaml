@@ -1,0 +1,11 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: injector-service
+spec:
+  selector:
+    app: "injector"
+  ports:
+  - protocol: TCP
+    port: 5000
+  type: NodePort

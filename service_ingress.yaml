@@ -1,0 +1,22 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+ name: gce-ingress
+ annotations:
+   ingress.kubernetes.io/rewrite-target: /
+spec:
+ backend:
+   serviceName: http-service
+   servicePort: 80
+ rules:
+ - http:
+    paths: 
+    - path: /api/*
+      backend:
+        serviceName: injector-service
+        servicePort: 5000
+    - path: /ui/*
+      backend:
+        serviceName: dunking-ibex-consul-ui
+        servicePort: 8500
+

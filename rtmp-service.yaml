@@ -1,0 +1,11 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: rtmp-service
+spec:
+  selector:
+    app: "nginx-rtmp" 
+  ports:
+  - protocol: TCP
+    port: 1935
+  type: LoadBalancer

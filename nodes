@@ -1,0 +1,9 @@
+sudo apt-get install libcurl4-doc libidn11-dev libkrb5-dev libldap2-dev libnss3-dev librtmp-dev
+  zlib1g-dev libcurl4-gnutls-dev libcurl4-nss-dev libcurl4-openssl-dev libpcre3-dev libpcre3 libpcsclite-dev
+
+curl -d '{"action":"startAd","adServer":"35.234.23.198", "adName":"testVAST.xml", "stream":"mystream"}' -H "Content-Type: application/json" -X POST http://35.227.212.244/api/v1/adSession
+
+
+
+ffprobe -select_streams v -skip_frame nokey -show_frames -v quiet /opt/data/hls/test669.ts | grep '^pkt_pts_time' | sed 's/pkt_pts_time=//'
+

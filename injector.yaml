@@ -1,0 +1,30 @@
+apiVersion: "extensions/v1beta1"
+kind: "Deployment"
+metadata:
+  name: "injector"
+  namespace: "default"
+  labels:
+    app: "injector"
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: "injector"
+  template:
+    metadata:
+      labels:
+        app: "injector"
+    spec:
+      containers:
+      - name: "injector"
+        image: "asia.gcr.io/cpb100-181006/nginx-injector:1.0"
+        env:
+        - name: "STREAM_URL"
+          valueFrom:
+            configMapKeyRef:
+              name: "injector-env"
+              key: "stream"
+        ports:
+        - containerPort: 5000
+          name: injector
+

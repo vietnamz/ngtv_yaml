@@ -1,0 +1,31 @@
+apiVersion: "extensions/v1beta1"
+kind: "Deployment"
+metadata:
+  name: "nginx-rtmp"
+  namespace: "default"
+  labels:
+    app: "nginx-rtmp"
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: "nginx-rtmp"
+  template:
+    metadata:
+      labels:
+        app: "nginx-rtmp"
+    spec:
+      containers:
+      - name: "nginx-rtmp"
+        image: "asia.gcr.io/cpb100-181006/nginx-rtmp-node:1.0"
+        ports:
+        - containerPort: 1935
+          name: rtmp
+        volumeMounts:
+        - name: nginx-persistent-storage
+          mountPath: "/var/hls"
+      volumes:
+      - name: nginx-persistent-storage
+        persistentVolumeClaim:
+           claimName: nginx-data
+

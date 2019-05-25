@@ -1,0 +1,31 @@
+apiVersion: "extensions/v1beta1"
+kind: "Deployment"
+metadata:
+  name: "nginx-http"
+  namespace: "default"
+  labels:
+    app: "nginx-http"
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: "nginx-http"
+  template:
+    metadata:
+      labels:
+        app: "nginx-http"
+    spec:
+      containers:
+      - name: "nginx-http"
+        image: "asia.gcr.io/cpb100-181006/nginx-rtmp-node:1.0"
+        ports:
+        - containerPort: 80
+          name: http
+        volumeMounts:
+        - name: nginx-persistent-storage
+          mountPath: "/var/hls"
+      volumes:
+      - name: nginx-persistent-storage
+        persistentVolumeClaim:
+           claimName: nginx-data
+

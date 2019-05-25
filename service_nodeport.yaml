@@ -1,0 +1,11 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: http-service
+spec:
+  selector:
+    app: "nginx-http"
+  ports:
+  - protocol: TCP
+    port: 80
+  type: NodePort
